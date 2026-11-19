@@ -1,5 +1,8 @@
 # Dino Run Repair Lab
 
+**Student:** Bhavish A  
+**SRN:** PES2UG24AM040
+
 This project is a single-file side-scrolling endless-runner clone using **Pygame**. It introduces students to obstacle spawning, jump-state tracking, and simple file-based persistence using a small, readable object-oriented codebase.
 
 ---

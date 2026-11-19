@@ -2,7 +2,7 @@
 <rect width="1240" height="830" fill="#ffffff"/>
 <defs><marker id="dep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10" fill="none" stroke="#333" stroke-width="1.4"/></marker></defs>
 <text x="620.0" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#1b2a4a">Self-Service Coffee Kiosk System &#8212; UML Component Diagram</text>
-<text x="620.0" y="60" text-anchor="middle" font-size="14" fill="#555">Architectural Style: Layered Architecture &#183; Ankit Bembalgi &#183; PES2UG24AM020</text>
+<text x="620.0" y="60" text-anchor="middle" font-size="14" fill="#555">Architectural Style: Layered Architecture &#183; Bhavish A &#183; PES2UG24AM040</text>
 <line x1="50" y1="196" x2="1190" y2="196" stroke="#aab2c4" stroke-width="1.2" stroke-dasharray="7 6"/>
 <line x1="50" y1="418" x2="1190" y2="418" stroke="#aab2c4" stroke-width="1.2" stroke-dasharray="7 6"/>
 <line x1="50" y1="598" x2="1190" y2="598" stroke="#aab2c4" stroke-width="1.2" stroke-dasharray="7 6"/>
