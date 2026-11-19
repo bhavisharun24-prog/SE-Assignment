@@ -1,0 +1,308 @@
+..FF..F....FFFF......FFFFFFFF.....F                                      [100%]
+================================== FAILURES ===================================
+_______________ test_axle_class_fuzz_never_leaks_parser_errors ________________
+
+    @given(st.one_of(st.text(max_size=20), st.none(), st.integers(), st.floats()))
+>   def test_axle_class_fuzz_never_leaks_parser_errors(value):
+                   ^^^
+
+test_highway_toll.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_highway_toll.py:36: in test_axle_class_fuzz_never_leaks_parser_errors
+    result = axle_class(value)
+             ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+axles = None
+
+    def axle_class(axles):
+>       n = int(axles)
+            ^^^^^^^^^^
+E       TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+E       Failing test case: test_axle_class_fuzz_never_leaks_parser_errors(
+E           value=None,
+E       )
+
+highway_toll.py:10: TypeError
+________________________ test_parse_plate_valid_inputs ________________________
+
+    @given(
+>       state=st.from_regex(r"[A-Z]{2}", fullmatch=True),
+                   ^^^
+        district=st.integers(min_value=0, max_value=99),
+        series=st.from_regex(r"[A-Z]{1,3}", fullmatch=True),
+        number=st.integers(min_value=0, max_value=9999),
+    )
+
+test_highway_toll.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+state = 'AA', district = 0, series = 'A', number = 0
+
+    @given(
+        state=st.from_regex(r"[A-Z]{2}", fullmatch=True),
+        district=st.integers(min_value=0, max_value=99),
+        series=st.from_regex(r"[A-Z]{1,3}", fullmatch=True),
+        number=st.integers(min_value=0, max_value=9999),
+    )
+    def test_parse_plate_valid_inputs(state, district, series, number):
+        plate = f"{state}-{district:02d}-{series}-{number:04d}"
+>       assert parse_plate(plate) == (state, district, series, number)
+E       AssertionError: assert ('AA', 0, 0) == ('AA', 0, 'A', 0)
+E         
+E         At index 2 diff: 0 != 'A'
+E         Right contains one more item: 0
+E         Use -v to get more diff
+E       Failing test case: test_parse_plate_valid_inputs(
+E           state='AA',
+E           district=0,
+E           series='A',
+E           number=0,
+E       )
+
+test_highway_toll.py:50: AssertionError
+________________ test_parse_plate_rejects_invalid_values[None] ________________
+
+plate = None
+
+    @pytest.mark.parametrize(
+        "plate",
+        [None, "", "KA", "KA-05-1234", "KA-ABC-AB-1234",
+         "KA-05-AB-12", "12-05-AB-1234", "KA-05-AB-12345"],
+    )
+    def test_parse_plate_rejects_invalid_values(plate):
+        with pytest.raises(ValueError):
+>           parse_plate(plate)
+
+test_highway_toll.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+plate = None
+
+    def parse_plate(plate):
+>       state, district, series, number = plate.split('-')
+                                          ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'split'
+
+highway_toll.py:2: AttributeError
+____________ test_parse_plate_rejects_invalid_values[KA-05-AB-12] _____________
+
+plate = 'KA-05-AB-12'
+
+    @pytest.mark.parametrize(
+        "plate",
+        [None, "", "KA", "KA-05-1234", "KA-ABC-AB-1234",
+         "KA-05-AB-12", "12-05-AB-1234", "KA-05-AB-12345"],
+    )
+    def test_parse_plate_rejects_invalid_values(plate):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+test_highway_toll.py:74: Failed
+___________ test_parse_plate_rejects_invalid_values[12-05-AB-1234] ____________
+
+plate = '12-05-AB-1234'
+
+    @pytest.mark.parametrize(
+        "plate",
+        [None, "", "KA", "KA-05-1234", "KA-ABC-AB-1234",
+         "KA-05-AB-12", "12-05-AB-1234", "KA-05-AB-12345"],
+    )
+    def test_parse_plate_rejects_invalid_values(plate):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+test_highway_toll.py:74: Failed
+___________ test_parse_plate_rejects_invalid_values[KA-05-AB-12345] ___________
+
+plate = 'KA-05-AB-12345'
+
+    @pytest.mark.parametrize(
+        "plate",
+        [None, "", "KA", "KA-05-1234", "KA-ABC-AB-1234",
+         "KA-05-AB-12", "12-05-AB-1234", "KA-05-AB-12345"],
+    )
+    def test_parse_plate_rejects_invalid_values(plate):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+test_highway_toll.py:74: Failed
+_________________ test_trip_cost_rejects_invalid_values[None] _________________
+
+value = None
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, "", "3", "3xx150", "ax150", "3x", "x150", "-1x150", "3x-150"],
+    )
+    def test_trip_cost_rejects_invalid_values(value):
+        with pytest.raises(ValueError):
+>           trip_cost(value)
+
+test_highway_toll.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+text = None
+
+    def trip_cost(text):
+>       count, rate = text.lower().split('x')
+                      ^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'lower'
+
+highway_toll.py:6: AttributeError
+________________ test_trip_cost_rejects_invalid_values[-1x150] ________________
+
+value = '-1x150'
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, "", "3", "3xx150", "ax150", "3x", "x150", "-1x150", "3x-150"],
+    )
+    def test_trip_cost_rejects_invalid_values(value):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+test_highway_toll.py:83: Failed
+________________ test_trip_cost_rejects_invalid_values[3x-150] ________________
+
+value = '3x-150'
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, "", "3", "3xx150", "ax150", "3x", "x150", "-1x150", "3x-150"],
+    )
+    def test_trip_cost_rejects_invalid_values(value):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+test_highway_toll.py:83: Failed
+________________ test_axle_class_rejects_invalid_values[None] _________________
+
+value = None
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, True, 0, 1, -2, 2.5, "", "abc", "inf", math.inf, math.nan],
+    )
+    def test_axle_class_rejects_invalid_values(value):
+        with pytest.raises((ValueError, OverflowError)):
+>           axle_class(value)
+
+test_highway_toll.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+axles = None
+
+    def axle_class(axles):
+>       n = int(axles)
+            ^^^^^^^^^^
+E       TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+
+highway_toll.py:10: TypeError
+________________ test_axle_class_rejects_invalid_values[True] _________________
+
+value = True
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, True, 0, 1, -2, 2.5, "", "abc", "inf", math.inf, math.nan],
+    )
+    def test_axle_class_rejects_invalid_values(value):
+>       with pytest.raises((ValueError, OverflowError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OverflowError)
+
+test_highway_toll.py:92: Failed
+__________________ test_axle_class_rejects_invalid_values[0] __________________
+
+value = 0
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, True, 0, 1, -2, 2.5, "", "abc", "inf", math.inf, math.nan],
+    )
+    def test_axle_class_rejects_invalid_values(value):
+>       with pytest.raises((ValueError, OverflowError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OverflowError)
+
+test_highway_toll.py:92: Failed
+__________________ test_axle_class_rejects_invalid_values[1] __________________
+
+value = 1
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, True, 0, 1, -2, 2.5, "", "abc", "inf", math.inf, math.nan],
+    )
+    def test_axle_class_rejects_invalid_values(value):
+>       with pytest.raises((ValueError, OverflowError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OverflowError)
+
+test_highway_toll.py:92: Failed
+_________________ test_axle_class_rejects_invalid_values[-2] __________________
+
+value = -2
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, True, 0, 1, -2, 2.5, "", "abc", "inf", math.inf, math.nan],
+    )
+    def test_axle_class_rejects_invalid_values(value):
+>       with pytest.raises((ValueError, OverflowError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OverflowError)
+
+test_highway_toll.py:92: Failed
+_________________ test_axle_class_rejects_invalid_values[2.5] _________________
+
+value = 2.5
+
+    @pytest.mark.parametrize(
+        "value",
+        [None, True, 0, 1, -2, 2.5, "", "abc", "inf", math.inf, math.nan],
+    )
+    def test_axle_class_rejects_invalid_values(value):
+>       with pytest.raises((ValueError, OverflowError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OverflowError)
+
+test_highway_toll.py:92: Failed
+_______________________ test_main_runs_with_valid_input _______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000173589C1A70>
+capsys = <_pytest.capture.CaptureFixture object at 0x000001735897BB60>
+
+    def test_main_runs_with_valid_input(monkeypatch, capsys):
+        answers = iter(["KA-05-AB-1234", "3x150", "3"])
+        monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+        main()
+        output = capsys.readouterr().out
+>       assert "('KA', 5, 'AB', 1234)" in output
+E       assert "('KA', 5, 'AB', 1234)" in "==== Running parse_plate ====\nState, District and Number: ('KA', 5, 1234)\n\n==== Running trip_cost ====\nTrip Cost: 450\n\n==== Running axle_class ====\nVehicle Class: truck\n"
+
+test_highway_toll.py:101: AssertionError
+=========================== short test summary info ===========================
+FAILED test_highway_toll.py::test_axle_class_fuzz_never_leaks_parser_errors
+FAILED test_highway_toll.py::test_parse_plate_valid_inputs - AssertionError: ...
+FAILED test_highway_toll.py::test_parse_plate_rejects_invalid_values[None] - ...
+FAILED test_highway_toll.py::test_parse_plate_rejects_invalid_values[KA-05-AB-12]
+FAILED test_highway_toll.py::test_parse_plate_rejects_invalid_values[12-05-AB-1234]
+FAILED test_highway_toll.py::test_parse_plate_rejects_invalid_values[KA-05-AB-12345]
+FAILED test_highway_toll.py::test_trip_cost_rejects_invalid_values[None] - At...
+FAILED test_highway_toll.py::test_trip_cost_rejects_invalid_values[-1x150] - ...
+FAILED test_highway_toll.py::test_trip_cost_rejects_invalid_values[3x-150] - ...
+FAILED test_highway_toll.py::test_axle_class_rejects_invalid_values[None] - T...
+FAILED test_highway_toll.py::test_axle_class_rejects_invalid_values[True] - F...
+FAILED test_highway_toll.py::test_axle_class_rejects_invalid_values[0] - Fail...
+FAILED test_highway_toll.py::test_axle_class_rejects_invalid_values[1] - Fail...
+FAILED test_highway_toll.py::test_axle_class_rejects_invalid_values[-2] - Fai...
+FAILED test_highway_toll.py::test_axle_class_rejects_invalid_values[2.5] - Fa...
+FAILED test_highway_toll.py::test_main_runs_with_valid_input - assert "('KA',...
+16 failed, 19 passed in 0.70s

@@ -1,12 +1,31 @@
-# Bhavish A — PES2UG24AM040 — Lab 7 ATM Withdrawal
+# L6_L7_36 — Highway Toll Calculator
 
 Lab 7: Fuzz Testing
+
+## About
+
+A small Python module that reads vehicle plates, prices trips and classifies vehicles by axle count.
 
 ## Files
 
 | File | Description |
 |------|-------------|
-| `atm_withdrawal.py` | Buggy code to test and fix |
-| `test_atm_withdrawal.py` | Fuzz test file to complete using Hypothesis |
+| `highway_toll.py` | The code under test |
+| `test_highway_toll.py` | Starter test file |
 
 Refer to the lab handout for instructions.
+# Highway Toll - Lab 7
+
+**Student:** Bhavish A
+**SRN:** PES2UG24AM040
+
+## Run
+
+```bash
+pip install pytest hypothesis
+python highway_toll.py
+pytest -q test_highway_toll.py
+```
+
+The three functions validate malformed plate strings, trip-cost expressions,
+and axle counts before processing them.
