@@ -1,8 +1,0 @@
-==== Running parse_plate ====
-Enter a plate (e.g. KA-05-AB-1234): State, District and Number: ('KA', 5, 1234)
-
-==== Running trip_cost ====
-Enter trips x rate (e.g. 3x150): Trip Cost: 450
-
-==== Running axle_class ====
-Enter an axle count (e.g. 3): Vehicle Class: truck
