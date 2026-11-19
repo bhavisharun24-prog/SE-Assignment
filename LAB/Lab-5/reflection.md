@@ -15,3 +15,9 @@
 4. **What would I add to future development?**
    I would add these tools to CI, preserve baseline and final reports, and enforce
    a Pylint score threshold and a clean Flake8/Bandit result on pull requests.
+
+## Verification
+
+The corrected program was executed and the output confirmed that the shared
+mutable settings bug no longer changes light settings. Pylint scored the final
+file 10.00/10, Bandit reported no issues, and Flake8 reported no violations.

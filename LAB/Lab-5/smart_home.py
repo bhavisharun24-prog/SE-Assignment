@@ -1,7 +1,6 @@
 """Smart home device controller demonstration."""
 
 import json
-from pathlib import Path
 from typing import Any
 
 
@@ -37,6 +36,9 @@ def toggle_device(device_name: str) -> bool:
 
 def set_temperature(device_name: str, value: int) -> bool:
     """Set a thermostat temperature within the supported range."""
+    if device_name not in devices:
+        print("Device not found:", device_name)
+        return False
     device = devices[device_name]
     if device["kind"] != "thermostat":
         print(device_name, "is not a thermostat")
@@ -65,12 +67,6 @@ def save_state(file_name: str = "home_state.json") -> None:
 def hub_address() -> str:
     """Return the local hub address used for app setup."""
     return f"{HUB_HOST}:{HUB_PORT}"
-
-
-def run_scene(scene_script: str) -> None:
-    """Describe a scene script without invoking a shell command."""
-    scene_path = Path("scenes") / scene_script
-    print("Prepared scene:", scene_path)
 
 
 def main() -> None:

@@ -7,3 +7,5 @@ venv/
 .venv/
 env/
 
+# Lab-generated application state
+home_state.json

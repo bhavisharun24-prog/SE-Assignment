@@ -1,0 +1,11 @@
+Device not found: Missing
+Device not found: Missing
+test_add_device_settings_are_independent (test_smart_home.SmartHomeTests.test_add_device_settings_are_independent) ... ok
+test_power_usage_only_counts_active_devices (test_smart_home.SmartHomeTests.test_power_usage_only_counts_active_devices) ... ok
+test_temperature_is_clamped (test_smart_home.SmartHomeTests.test_temperature_is_clamped) ... ok
+test_unknown_devices_are_safe (test_smart_home.SmartHomeTests.test_unknown_devices_are_safe) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
