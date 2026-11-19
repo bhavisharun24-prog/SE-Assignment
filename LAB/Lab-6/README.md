@@ -4,7 +4,7 @@ Lab 6: Code and Branch Coverage
 
 ## About
 
-A small Python module that calculates toll charges by axle count, peak hours and electronic tag, and advises on monthly passes.
+A small Python  module that calculates toll charges by axle count, peak hours and electronic tag, and advises on monthly passes.
 
 ## Files
 
